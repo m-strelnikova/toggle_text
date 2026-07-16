@@ -1,13 +1,4 @@
 /**Создание компонента ToggleText
-Создайте файл `ToggleText.js`:
-В папке `components` вашего проекта создайте новый файл с именем `ToggleText.js`.
-Создайте файл стилей `ToggleText.css`**:
-В папке `components` вашего проекта создайте новый файл с именем `ToggleText.css`.
-Реализация компонента ToggleText
-Импортируйте необходимые библиотеки:
-В файле `ToggleText.js` импортируйте библиотеки `react` и стили из `ToggleText.css`.
-Создайте компонент ToggleText:
-Создайте функциональный компонент `ToggleText` с помощью функции JavaScript.
 Используйте хуки `useRef` и `useState` для управления состояниями компонента.
 Определите переменные с использованием useRef и useState:
 Создайте переменные для хранения ссылки на элемент текста, отслеживания состояния видимости и управления длительностью анимации.
@@ -33,7 +24,25 @@
 Измените значение в текстовом поле и проверьте, что длительность анимации изменяется соответственно.
  */
 
-function ToggleText () {
+import { useRef, useState, useEffect } from "react";
 
+function ToggleText() {
+
+    const textRef = useRef(null);
+    const [isVisible, setIsVisible] = useState(true);
+    const [duration, setDuration] = useState(0.5);
+
+    useEffect(() => {
+        const text = textRef.current;
+    })
+
+    return (
+        <div>
+            <h1>Скрытие и отображение текста с анимацией</h1>
+            <button>Скрыть текст</button>
+            <input type="text" />
+            <p ref={textRef}>Это скрываемый текст. Нажмите кнопку, чтобы скрыть или показать его.</p>
+        </div>
+    )
 }
 export default ToggleText;
