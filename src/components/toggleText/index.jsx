@@ -29,20 +29,43 @@ import { useRef, useState, useEffect } from "react";
 function ToggleText() {
 
     const textRef = useRef(null);
+
     const [isVisible, setIsVisible] = useState(true);
-    const [duration, setDuration] = useState(0.5);
+    const [duration, setDuration] = useState("");
+
+    const handleChange = (e) => {
+
+        if (/^\d*\.?\d*$/.test(e.target.value)) {
+            setDuration(e.target.value);
+        }
+    };
 
     useEffect(() => {
-        const text = textRef.current;
-    })
+        const seconds = Number(duration) || 0;
+
+        textRef.current.style.transition = `opacity ${seconds}s ease`;
+        textRef.current.style.opacity = isVisible ? "1" : "0";
+    }, [isVisible, duration]);
 
     return (
         <div>
             <h1>Скрытие и отображение текста с анимацией</h1>
-            <button>Скрыть текст</button>
-            <input type="text" />
-            <p ref={textRef}>Это скрываемый текст. Нажмите кнопку, чтобы скрыть или показать его.</p>
+
+            <button onClick={() => setIsVisible(!isVisible)}>
+                {isVisible ? "Скрыть текст" : "Показать текст"}
+            </button>
+
+            <input
+                type="text"
+                value={duration}
+                onChange={handleChange}
+            />
+
+            <p ref={textRef} style={{ opacity: 1, }}>
+                Это скрываемый текст. Нажмите кнопку, чтобы скрыть или показать его.
+            </p>
         </div>
-    )
+    );
 }
+
 export default ToggleText;
