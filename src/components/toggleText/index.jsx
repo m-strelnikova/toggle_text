@@ -25,6 +25,7 @@
  */
 
 import { useRef, useState, useEffect } from "react";
+const shortStyle = { margin: "5px 10px", fontFamily: "Arial"};
 
 function ToggleText() {
 
@@ -48,10 +49,10 @@ function ToggleText() {
     }, [isVisible, duration]);
 
     return (
-        <div>
-            <h1>Скрытие и отображение текста с анимацией</h1>
+        <div style={{margin: "10px 25%", backgroundColor: "aliceblue", padding: "10px"}}>
+            <h1 style={shortStyle}>Скрытие и отображение текста с анимацией</h1>
 
-            <button onClick={() => setIsVisible(!isVisible)}>
+            <button onClick={() => setIsVisible(!isVisible)} style={shortStyle}>
                 {isVisible ? "Скрыть текст" : "Показать текст"}
             </button>
 
@@ -59,9 +60,10 @@ function ToggleText() {
                 type="text"
                 value={duration}
                 onChange={handleChange}
+                style={shortStyle}
             />
 
-            <p ref={textRef} style={{ opacity: 1, }}>
+            <p ref={textRef} style={{ opacity: 1, }} style={shortStyle}>
                 Это скрываемый текст. Нажмите кнопку, чтобы скрыть или показать его.
             </p>
         </div>
